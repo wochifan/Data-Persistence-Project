@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class ScoreManager : MonoBehaviour
 {
 
@@ -50,6 +52,16 @@ public class ScoreManager : MonoBehaviour
     public void LoadMainScene(){
         SceneManager.LoadScene("main");
     }
+
+    public void Exit() {
+#if UNITY_EDITOR
+    EditorApplication.ExitPlaymode();
+#else
+    Application.Quit();
+#endif
+    }
+
+
 
     public void SaveHighScore(int pScore){
         SaveData data = new SaveData();
